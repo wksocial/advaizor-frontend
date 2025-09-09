@@ -22,7 +22,7 @@ const SetNewPasswordPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-indigo-200/60 via-white to-orange-100 px-[20%]">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-indigo-200/60 via-white to-orange-tertiary px-[20%]">
       <div className="w-full max-w-lg bg-[#FFFFFF8C] backdrop-blur-xl shadow-xl rounded-2xl px-12 py-12 text-center">
         {/* Illustration */}
         <div className="mb-6 flex justify-center">
@@ -36,10 +36,10 @@ const SetNewPasswordPage = () => {
 
         {/* Heading */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#1E293B]">
+          <h2 className="text-3xl font-bold text-black-primary">
             Set New Password
           </h2>
-          <p className="text-[#7C7C7C] text-base mt-2">
+          <p className="text-gray-primary text-base mt-2">
             Must be at least 6 character
           </p>
         </div>
@@ -48,7 +48,7 @@ const SetNewPasswordPage = () => {
         <form onSubmit={handleSubmit} className="space-y-5 text-left">
           {/* New Password */}
           <div>
-            <label className="block text-lg font-medium text-[#1E293B] mb-1">
+            <label className="block text-lg font-medium text-black-primary mb-1">
               Add New Password
             </label>
             <input
@@ -56,13 +56,13 @@ const SetNewPasswordPage = () => {
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-[#C2C2C2] px-5 py-3 text-base focus:ring-indigo-500 outline-none placeholder:text-[#777777]"
+              className="w-full rounded-lg border border-gray-secondary px-5 py-3 text-base focus:ring-indigo-500 outline-none placeholder:text-gray-primary"
             />
           </div>
 
           {/* Confirm Password */}
           <div>
-            <label className="block text-lg font-medium text-[#1E293B] mb-1">
+            <label className="block text-lg font-medium text-black-primary mb-1">
               Confirm Password
             </label>
             <input
@@ -70,7 +70,7 @@ const SetNewPasswordPage = () => {
               placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-lg border border-[#C2C2C2] px-5 py-3 text-base focus:ring-indigo-500 outline-none placeholder:text-[#777777]"
+              className="w-full rounded-lg border border-gray-secondary px-5 py-3 text-base focus:ring-indigo-500 outline-none placeholder:text-gray-primary"
             />
           </div>
 
@@ -78,7 +78,7 @@ const SetNewPasswordPage = () => {
           <Link href="/forget-password/successful" className="block">
             <button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-red-600 cursor-pointer text-white font-medium py-3 rounded-full transition"
+              className="w-full bg-orange-primary hover:bg-red-600 cursor-pointer text-white font-medium py-3 rounded-full transition"
             >
               Set New Password
             </button>
@@ -87,7 +87,7 @@ const SetNewPasswordPage = () => {
           {/* Back Button */}
           <Link
             href="/forget-password/verify-code"
-            className="w-full block text-center border border-[#C2C2C2] bg-white text-[#111827] font-medium py-3 rounded-full hover:bg-gray-50 transition"
+            className="w-full block text-center border border-gray-secondary bg-white text-black-primary font-medium py-3 rounded-full hover:bg-gray-50 transition"
           >
             Back
           </Link>
