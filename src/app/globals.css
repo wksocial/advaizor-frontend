@@ -11,6 +11,7 @@
   --black-secondary: #1E293B;
   --gray-primary: #7C7C7C;
   --gray-secondary: #C2C2C2;
+  --gray-tertiary: #2B313F;
   --blue-primary: #111727;
 }
 
@@ -25,6 +26,7 @@
   --color-black-secondary: var(--black-secondary);
   --color-gray-primary: var(--gray-primary);
   --color-gray-secondary: var(--gray-secondary);
+  --color-gray-tertiary: var(--gray-tertiary);
   --color-blue-primary: var(--blue-primary);
 
   --font-sans: var(--font-inter);
