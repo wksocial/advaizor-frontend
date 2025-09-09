@@ -2,7 +2,7 @@
 
 ## Installation
 
-### Steps to run the project:
+### Steps to run the project on your machine:
 
 First step:
 
