@@ -13,6 +13,8 @@
   --gray-secondary: #C2C2C2;
   --gray-tertiary: #2B313F;
   --blue-primary: #111727;
+  --blue-secondary: #197CEF;
+  --green-primary: #03CA00;
 }
 
 @theme inline {
@@ -28,6 +30,8 @@
   --color-gray-secondary: var(--gray-secondary);
   --color-gray-tertiary: var(--gray-tertiary);
   --color-blue-primary: var(--blue-primary);
+  --color-blue-secondary: var(--blue-secondary);
+  --color-green-primary: var(--green-primary);
 
   --font-sans: var(--font-inter);
 }

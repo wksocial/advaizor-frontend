@@ -133,9 +133,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       </aside>
 
       {/* Main content */}
-      <div className="bg-[#F9FAFB] flex-1 flex flex-col">
+      <div className="bg-white flex-1 flex flex-col">
         {/* Header */}
-        <header className="flex items-center justify-between py-4 px-6">
+        <header className="flex items-center justify-between pt-4 px-6">
           <h1 className="text-3xl font-bold text-black-primary">{pageTitle}</h1>
 
           <div className="flex items-center gap-6">
@@ -168,7 +168,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 px-6 py-4">{children}</main>
       </div>
     </div>
   );
