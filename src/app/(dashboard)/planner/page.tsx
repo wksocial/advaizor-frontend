@@ -10,7 +10,7 @@ const PlannerPage = () => {
   const [totalCredit, setTotalCredit] = useState(120);
   const [creditPerTerm, setCreditPerTerm] = useState(10);
   const [completed, setCompleted] = useState(30);
-  const [graduation, setGraduation] = useState("Fall 2029");
+  const [graduation, setGraduation] = useState<string | null>(null);
 
   // Cost states
   const [creditCost, setCreditCost] = useState(500); // example default
@@ -155,10 +155,20 @@ const PlannerPage = () => {
                   alt="Graduation"
                 />
               </div>
-              <p className="text-gray-tertiary text-xl font-semibold mb-2">
-                You are on track to graduate in
-              </p>
-              <p className="text-2xl font-bold text-orange-primary">{graduation}</p>
+              {graduation !== null ? (
+                <>
+                  <p className="text-gray-tertiary text-xl font-semibold mb-2">
+                   You are on track to graduate in
+                  </p>
+                  <p className="text-2xl font-bold text-orange-primary">
+                    ${graduation}
+                  </p>
+                </>
+              ) : (
+                <p className="text-gray-tertiary text-xl font-semibold">
+                  Enter details and click Generate Plan
+                </p>
+              )}
             </div>
           </div>
         </div>
