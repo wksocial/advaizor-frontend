@@ -45,7 +45,7 @@ const PlannerPage = () => {
   };
 
   return (
-    <div className="bg-[#FAFBFC] px-6 pt-6 pb-12 flex flex-col gap-6 rounded-[20px] border border-gray-200">
+    <div className="bg-[#FAFBFC] px-6 pt-6 pb-14 flex flex-col gap-6 rounded-[20px] border border-gray-200">
       {/* Top Header */}
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1">
