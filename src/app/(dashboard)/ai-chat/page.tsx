@@ -2,99 +2,120 @@
 import Image from "next/image";
 import { useState } from "react";
 
+interface Message {
+  sender: "user" | "assistant";
+  text: string;
+}
+
 const AIChatPage = () => {
-  const [selectedChat, setSelectedChat] = useState<number | null>(0);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+
+    const userMessage: Message = { sender: "user", text: input };
+    const thinkingMessage: Message = {
+      sender: "assistant",
+      text: "Thinking...",
+    };
+
+    // Add both user and assistant placeholder at once
+    setMessages((prev) => [...prev, userMessage, thinkingMessage]);
+    setInput("");
+
+    // Replace assistant's placeholder after delay
+    setTimeout(() => {
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          sender: "assistant",
+          text: "Thanks for your question. I am getting back to you later",
+        };
+        return updated;
+      });
+    }, 1500);
+  };
 
   return (
     <>
-      <div className="flex min-h-screen gap-[1%]">
+      <div className="flex h-[93%] overflow-hidden gap-[1%]">
         {/* Chat Area */}
         <div className="flex flex-col flex-1 p-6 bg-background-primary rounded-2xl border border-gray-secondary">
           {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto">
-            {/* User Message (Left) */}
-            <div className="flex items-start gap-3 mb-4">
-              {/* Avatar */}
-              <img
-                src="images/dashboard/avatar.png"
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full object-cover"
-              />
-
-              {/* Message Bubble */}
-              <div className="max-w-xl bg-gray-100 p-4 rounded-lg border border-gray-secondary">
-                <p className="text-gray-primary text-sm leading-7">
-                  Hello Khalid, how can I help you?
-                </p>
-              </div>
-            </div>
-
-            {/* Assistant Message (Right) */}
-            <div className="flex items-start gap-3 mb-4 justify-end">
-              {/* Message Bubble */}
-              <div className="max-w-xl bg-orange-100 p-4 rounded-lg border border-gray-secondary">
-                <p className="text-gray-primary text-sm leading-7">
-                  Based on your interests, a career in Data Analytics could be a
-                  great fit. Would you like me to suggest some programs?
-                </p>
-              </div>
-
-              {/* Avatar */}
-              <img
-                src="images/dashboard/ai-avatar.svg"
-                alt="AI Avatar"
-                className="w-10 h-10 rounded-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Suggestions */}
-          <div className="border-t border-gray-secondary pt-4">
-            <h3 className="font-semibold text-gray-primary mb-3">
-              Try asking:
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "What career path is right for me?",
-                "How long will it take to complete a Computer Science degree?",
-                "What are the prerequisites for Data Analytics programs?",
-                "What's the job outlook for UX designers?",
-              ].map((q, idx) => (
-                <button
-                  key={idx}
-                  className="px-5 py-4 text-sm bg-white hover:bg-gray-secondary cursor-pointer border border-gray-secondary rounded-lg text-black-primary"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-
-            {/* Input Box */}
-            <div className="flex items-center mt-4 border border-gray-secondary rounded-lg px-3 py-2 bg-white">
-              <input
-                type="text"
-                placeholder="Ask me anything about your academic journey..."
-                className="flex-1 outline-none text-sm text-gray-700"
-              />
-              <button className="flex items-center gap-2 ml-2 bg-orange-primary cursor-pointer hover:bg-orange-600 text-base text-white px-4 py-2 rounded-lg">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="26"
-                  viewBox="0 0 25 26"
-                  fill="none"
-                >
-                  <path
-                    d="M20.0844 11.9899C20.0119 12.0625 19.9257 12.1201 19.8309 12.1594C19.736 12.1988 19.6344 12.219 19.5317 12.219C19.429 12.219 19.3274 12.1988 19.2325 12.1594C19.1377 12.1201 19.0515 12.0625 18.9789 11.9899L13.2817 6.29163L13.2817 21.5934C13.2817 21.8006 13.1994 21.9993 13.0529 22.1458C12.9063 22.2923 12.7076 22.3746 12.5004 22.3746C12.2932 22.3746 12.0945 22.2923 11.948 22.1458C11.8015 21.9993 11.7192 21.8006 11.7192 21.5934V6.29163L6.02192 11.9899C5.87532 12.1365 5.6765 12.2188 5.46918 12.2188C5.26187 12.2188 5.06304 12.1365 4.91645 11.9899C4.76986 11.8433 4.6875 11.6445 4.6875 11.4371C4.6875 11.2298 4.76986 11.031 4.91645 10.8844L11.9477 3.85315C12.0203 3.78052 12.1064 3.72289 12.2013 3.68358C12.2961 3.64426 12.3978 3.62402 12.5004 3.62402C12.6031 3.62402 12.7048 3.64426 12.7996 3.68358C12.8944 3.72289 12.9806 3.78052 13.0532 3.85315L20.0844 10.8844C20.1571 10.957 20.2147 11.0431 20.254 11.138C20.2933 11.2328 20.3135 11.3345 20.3135 11.4371C20.3135 11.5398 20.2933 11.6415 20.254 11.7363C20.2147 11.8312 20.1571 11.9173 20.0844 11.9899Z"
-                    fill="white"
+            {messages.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`flex items-start gap-3 mb-4 ${
+                  msg.sender === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                {msg.sender === "assistant" && (
+                  <img
+                    src="images/dashboard/ai-avatar.png"
+                    alt="AI Avatar"
+                    className="w-10 h-10 rounded-full object-cover"
                   />
-                </svg>
-                Send
-              </button>
-            </div>
+                )}
+
+                <div
+                  className={`max-w-xl p-4 rounded-lg border border-gray-secondary ${
+                    msg.sender === "user"
+                      ? "bg-orange-100 text-gray-900"
+                      : "bg-gray-100 text-gray-primary"
+                  }`}
+                >
+                  <p className="text-sm leading-7">{msg.text}</p>
+                </div>
+
+                {msg.sender === "user" && (
+                  <img
+                    src="images/dashboard/avatar.png"
+                    alt="User Avatar"
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                )}
+              </div>
+            ))}
           </div>
 
-          {/* Bottom Actions */}
+          <div className="border-t border-gray-secondary pt-4"></div>
+          <h3 className="font-semibold text-gray-primary mb-3">Try asking:</h3>
+          <div className="flex flex-wrap gap-2">
+            {[
+              "What career path is right for me?",
+              "How long will it take to complete a Computer Science degree?",
+              "What are the prerequisites for Data Analytics programs?",
+              "What's the job outlook for UX designers?",
+            ].map((q, idx) => (
+              <button
+                key={idx}
+                className="px-5 py-4 text-sm bg-white hover:bg-gray-secondary cursor-pointer border border-gray-secondary rounded-lg text-black-primary"
+              >
+                {q}
+              </button>
+            ))}
+          </div>
+
+          {/* Input Box */}
+          <div className="flex items-center mt-4 border border-gray-secondary rounded-lg px-3 py-2 bg-white">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask me anything about your academic journey..."
+              className="flex-1 outline-none text-sm text-gray-700"
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+            />
+            <button
+              onClick={handleSend}
+              className="flex items-center gap-2 ml-2 bg-orange-primary cursor-pointer hover:bg-orange-600 text-base text-white px-4 py-2 rounded-lg"
+            >
+              Send
+            </button>
+          </div>
+
           <div className="flex justify-between mt-6 text-sm gap-4">
             <div className="flex-1 bg-[linear-gradient(159deg,#FFF_13.91%,#FBF0EA_106.7%)] px-[18px] py-6 flex items-center gap-3 rounded-xl">
               <div className="w-11 h-11 rounded-full bg-[#FFC1FC] flex items-center justify-center">
@@ -234,8 +255,8 @@ const AIChatPage = () => {
           </div>
         </div>
 
-        {/* Chat History Sidebar */}
-        <div className="w-64 2xl:w-70 bg-background-primary p-4 overflow-y-auto rounded-2xl border border-gray-secondary">
+        {/* Sidebar (you already have this, unchanged) */}
+        <div className="w-64 2xl:w-70 bg-background-primary p-4 rounded-2xl border border-gray-secondary">
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-black-primary text-xl font-semibold">
               Chat History
@@ -253,12 +274,7 @@ const AIChatPage = () => {
             {Array.from({ length: 14 }).map((_, i) => (
               <li
                 key={i}
-                onClick={() => setSelectedChat(i)}
-                className={`font-medium w-full px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200 ${
-                  selectedChat === i
-                    ? "bg-gray-100 text-gray-primary"
-                    : "bg-white text-gray-primary"
-                }`}
+                className="font-medium w-full px-3 py-2 rounded-lg cursor-pointer transition-colors duration-200 bg-white text-gray-primary"
               >
                 Should I consider Advaizor?
               </li>
