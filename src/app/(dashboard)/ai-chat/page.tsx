@@ -53,14 +53,14 @@ const AIChatPage = () => {
               >
                 {msg.sender === "assistant" && (
                   <img
-                    src="images/dashboard/ai-avatar.png"
+                    src="images/dashboard/ai-avatar.svg"
                     alt="AI Avatar"
                     className="w-10 h-10 rounded-full object-cover"
                   />
                 )}
 
                 <div
-                  className={`max-w-xl p-4 rounded-lg border border-gray-secondary ${
+                  className={`max-w-xl px-4 py-2 rounded-lg border border-gray-secondary ${
                     msg.sender === "user"
                       ? "bg-orange-100 text-gray-900"
                       : "bg-gray-100 text-gray-primary"
