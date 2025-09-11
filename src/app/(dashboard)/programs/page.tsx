@@ -67,7 +67,7 @@ const ProgramsPage = () => {
   ];
 
   return (
-    <div className="bg-[#FAFBFC] px-6 pt-6 pb-14 flex flex-col gap-7 rounded-[20px] border border-gray-secondary">
+    <div className="bg-background-primary px-6 pt-6 pb-14 flex flex-col gap-7 rounded-[20px] border border-gray-secondary">
       {/* Heading */}
       <h2 className="text-2xl text-black font-semibold">
         Perfect Program Matches

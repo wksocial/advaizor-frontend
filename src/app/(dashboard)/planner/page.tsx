@@ -3,7 +3,9 @@ import Image from "next/image";
 import { useState } from "react";
 
 const PlannerPage = () => {
-  const [activeTab, setActiveTab] = useState<"graduation" | "cost">("graduation");
+  const [activeTab, setActiveTab] = useState<"graduation" | "cost">(
+    "graduation"
+  );
 
   // Graduation states
   const [startTerm, setStartTerm] = useState("Fall 2024");
@@ -45,7 +47,7 @@ const PlannerPage = () => {
   };
 
   return (
-    <div className="bg-[#FAFBFC] px-6 pt-6 pb-14 flex flex-col gap-6 rounded-[20px] border border-gray-200">
+    <div className="bg-background-primary px-6 pt-6 pb-14 flex flex-col gap-6 rounded-[20px] border border-gray-secondary">
       {/* Top Header */}
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1">
@@ -91,7 +93,9 @@ const PlannerPage = () => {
 
             {/* Start Term */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Start Term</label>
+              <label className="block text-sm font-medium mb-2">
+                Start Term
+              </label>
               <select
                 className="w-full rounded-lg border border-gray-secondary p-2"
                 value={startTerm}
@@ -105,7 +109,9 @@ const PlannerPage = () => {
 
             {/* Total Credit */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Total Credit</label>
+              <label className="block text-sm font-medium mb-2">
+                Total Credit
+              </label>
               <input
                 type="number"
                 className="w-full rounded-lg border border-gray-secondary p-2"
@@ -116,7 +122,9 @@ const PlannerPage = () => {
 
             {/* Credit Per Term */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Credit Per Term</label>
+              <label className="block text-sm font-medium mb-2">
+                Credit Per Term
+              </label>
               <input
                 type="number"
                 className="w-full rounded-lg border border-gray-secondary p-2"
@@ -127,7 +135,9 @@ const PlannerPage = () => {
 
             {/* Completed */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Completed</label>
+              <label className="block text-sm font-medium mb-2">
+                Completed
+              </label>
               <input
                 type="number"
                 className="w-full rounded-lg border border-gray-secondary p-2"
@@ -158,7 +168,7 @@ const PlannerPage = () => {
               {graduation !== null ? (
                 <>
                   <p className="text-gray-tertiary text-xl font-semibold mb-2">
-                   You are on track to graduate in
+                    You are on track to graduate in
                   </p>
                   <p className="text-2xl font-bold text-orange-primary">
                     ${graduation}
@@ -179,7 +189,9 @@ const PlannerPage = () => {
             <h2 className="text-xl font-semibold mb-8">Plan Configuration</h2>
 
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Start Term</label>
+              <label className="block text-sm font-medium mb-2">
+                Start Term
+              </label>
               <select
                 className="w-full rounded-lg border border-gray-secondary p-2"
                 value={startTerm}
@@ -193,7 +205,9 @@ const PlannerPage = () => {
 
             {/* Total Credit */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Total Credit</label>
+              <label className="block text-sm font-medium mb-2">
+                Total Credit
+              </label>
               <input
                 type="number"
                 className="w-full rounded-lg border border-gray-secondary p-2"
@@ -204,7 +218,9 @@ const PlannerPage = () => {
 
             {/* Completed */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Completed</label>
+              <label className="block text-sm font-medium mb-2">
+                Completed
+              </label>
               <input
                 type="number"
                 className="w-full rounded-lg border border-gray-secondary p-2"
@@ -215,7 +231,9 @@ const PlannerPage = () => {
 
             {/* Credit Cost */}
             <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Credit Cost ($)</label>
+              <label className="block text-sm font-medium mb-2">
+                Credit Cost ($)
+              </label>
               <input
                 type="number"
                 className="w-full rounded-lg border border-gray-secondary p-2"

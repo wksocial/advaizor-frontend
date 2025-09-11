@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   // Map routes to header titles
   const routeTitles: Record<string, string> = {
     "/dashboard": "Dashboard",
-    "/ai-chat": "AI Advaizor",
+    "/ai-chat": "AI Academic Advaisor",
     "/programs": "Programs",
     "/planner": "Program Planner",
     "/feedback": "Feedback",
@@ -135,7 +135,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       {/* Main content */}
       <div className="bg-white flex-1 flex flex-col">
         {/* Header */}
-        <header className="flex items-center justify-between pt-4 px-6">
+        <header className="h-[7%] flex items-center justify-between pt-4 px-6">
           <h1 className="text-3xl font-bold text-black-primary">{pageTitle}</h1>
 
           <div className="flex items-center gap-6">
