@@ -119,7 +119,7 @@ const GeneralSettingsComponent = () => {
                 <span
                   className={
                     selectedGender === "Gender"
-                      ? "text-gray-500"
+                      ? "text-gray-primary"
                       : "text-black-primary"
                   }
                 >
@@ -195,7 +195,7 @@ const GeneralSettingsComponent = () => {
                   className="flex items-center justify-between bg-white border border-gray-border rounded-md p-[10px] text-sm cursor-pointer"
                   onClick={() => setCountryOpen(!countryOpen)}
                 >
-                  <span>{selectedCountry || "Select Country"}</span>
+                  <span className={`${selectedCity ? "text-black-primary" : "text-gray-primary"}`}>{selectedCountry || "Select Country"}</span>
                   <Image
                     src="/images/dashboard/arrowDown.svg"
                     alt="Down"
@@ -239,7 +239,7 @@ const GeneralSettingsComponent = () => {
                   className="flex items-center justify-between bg-white border border-gray-border rounded-md p-[10px] text-sm cursor-pointer"
                   onClick={() => setCityOpen(!cityOpen)}
                 >
-                  <span>{selectedCity || "Select City"}</span>
+                  <span className={`${selectedCity ? "text-black-primary" : "text-gray-primary"}`}>{selectedCity || "Select City"}</span>
                   <Image
                     src="/images/dashboard/arrowDown.svg"
                     alt="Down"
@@ -290,30 +290,30 @@ const GeneralSettingsComponent = () => {
                     <path
                       d="M25.0001 28.0005H6.99908C6.73387 28.0005 6.47951 27.8951 6.29198 27.7076C6.10444 27.5201 5.99908 27.2657 5.99908 27.0005V5.00049C5.99908 4.73527 6.10444 4.48092 6.29198 4.29338C6.47951 4.10585 6.73387 4.00049 6.99908 4.00049H19.0001L26.0001 11.0005V27.0005C26.0001 27.1318 25.9742 27.2618 25.9239 27.3832C25.8737 27.5045 25.8 27.6147 25.7072 27.7076C25.6143 27.8005 25.5041 27.8741 25.3827 27.9244C25.2614 27.9746 25.1314 28.0005 25.0001 28.0005Z"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M18.9999 4.00049V11.0005H26.0009"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M12 16.9995H20"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M12 21H20"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   <div>
@@ -345,30 +345,30 @@ const GeneralSettingsComponent = () => {
                     <path
                       d="M25.0001 28.0005H6.99908C6.73387 28.0005 6.47951 27.8951 6.29198 27.7076C6.10444 27.5201 5.99908 27.2657 5.99908 27.0005V5.00049C5.99908 4.73527 6.10444 4.48092 6.29198 4.29338C6.47951 4.10585 6.73387 4.00049 6.99908 4.00049H19.0001L26.0001 11.0005V27.0005C26.0001 27.1318 25.9742 27.2618 25.9239 27.3832C25.8737 27.5045 25.8 27.6147 25.7072 27.7076C25.6143 27.8005 25.5041 27.8741 25.3827 27.9244C25.2614 27.9746 25.1314 28.0005 25.0001 28.0005Z"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M18.9999 4.00049V11.0005H26.0009"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M12 16.9995H20"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M12 21H20"
                       stroke="#197CEF"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   <div>
