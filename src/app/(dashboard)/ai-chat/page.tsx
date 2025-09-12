@@ -82,6 +82,7 @@ const AIChatPage = () => {
 
           <div className="border-t border-gray-secondary pt-4"></div>
           <h3 className="font-semibold text-gray-primary mb-3">Try asking:</h3>
+          {/* Try asking buttons */}
           <div className="flex flex-wrap gap-2">
             {[
               "What career path is right for me?",
@@ -91,6 +92,7 @@ const AIChatPage = () => {
             ].map((q, idx) => (
               <button
                 key={idx}
+                onClick={() => setInput(q)} // <-- Set input when clicked
                 className="px-5 py-4 text-sm bg-white hover:bg-gray-secondary cursor-pointer border border-gray-secondary rounded-lg text-black-primary"
               >
                 {q}
@@ -255,7 +257,7 @@ const AIChatPage = () => {
           </div>
         </div>
 
-        {/* Sidebar (you already have this, unchanged) */}
+        {/* Sidebar */}
         <div className="w-64 2xl:w-70 bg-background-primary p-4 rounded-2xl border border-gray-secondary">
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-black-primary text-xl font-semibold">
