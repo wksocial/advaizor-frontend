@@ -193,34 +193,7 @@ const PasswordSettingsComponent = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="border border-gray-border rounded-[20px] p-5 lg:p-6 bg-white">
-          <span className="bg-[#CFE6FF] rounded-full h-18 w-18 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-            >
-              <path
-                d="M41 33V17C41 12.286 41 9.92894 39.5354 8.46446C38.071 7 35.714 7 31 7H17C12.286 7 9.92892 7 8.46446 8.46446C7 9.92894 7 12.286 7 17V33"
-                stroke="#197CEF"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M43.9684 41H4.03158C3.2657 41 2.76758 40.2176 3.1101 39.5528L7 33H41L44.8898 39.5528C45.2324 40.2176 44.7342 41 43.9684 41Z"
-                stroke="#197CEF"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-
-        </div> */}
+        
         <div className="border border-gray-border rounded-[20px] p-5 lg:p-6 bg-white">
           {/* Top Icon */}
           <div className="bg-[#CFE6FF] rounded-full h-18 w-18 flex items-center justify-center mb-4">
