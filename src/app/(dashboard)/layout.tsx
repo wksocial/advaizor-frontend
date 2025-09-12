@@ -15,6 +15,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     "/programs": "Programs",
     "/planner": "Program Planner",
     "/feedback": "Feedback",
+    "/profile": "Profile",
   };
 
   // Get title from map (fallback: empty string)
@@ -156,13 +157,15 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
             {/* User Avatar */}
             <div className="w-12 h-12 rounded-full overflow-hidden cursor-pointer">
-              <Image
-                src="/images/dashboard/avatar.png"
-                alt="User Avatar"
-                width={40}
-                height={40}
-                className="object-cover"
-              />
+              <Link href="/profile">
+                <Image
+                  src="/images/dashboard/avatar.png"
+                  alt="User Avatar"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                />
+              </Link>
             </div>
           </div>
         </header>

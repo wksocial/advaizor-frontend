@@ -11,6 +11,7 @@
   --black-primary: #141522;
   --black-secondary: #1E293B;
   --gray-primary: #7C7C7C;
+  --gray-border: #EBEBEB;
   --gray-secondary: #C2C2C2;
   --gray-tertiary: #2B313F;
   --blue-primary: #111727;
@@ -32,6 +33,7 @@
   --color-gray-primary: var(--gray-primary);
   --color-gray-secondary: var(--gray-secondary);
   --color-gray-tertiary: var(--gray-tertiary);
+  --color-gray-border: var(--gray-border);
   --color-blue-primary: var(--blue-primary);
   --color-blue-secondary: var(--blue-secondary);
   --color-green-primary: var(--green-primary);
