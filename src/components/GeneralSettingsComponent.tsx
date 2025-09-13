@@ -1,3 +1,4 @@
+import { countries } from "@/utils/countries";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -5,16 +6,19 @@ const GeneralSettingsComponent = () => {
   const [genderOpen, setGenderOpen] = useState(false);
   const [selectedGender, setSelectedGender] = useState("Gender");
 
-  const [countryOpen, setCountryOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [phoneCountryOpen, setPhoneCountryOpen] = useState(false);
+  const [addressCountryOpen, setAddressCountryOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]); // shared for sync
 
   const [cityOpen, setCityOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
 
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const genderOptions = ["Male", "Female", "Other"];
 
   return (
-    <div className="">
+    <div>
       {/* Header */}
       <div className="flex items-center justify-between bg-white border border-gray-border rounded-[20px] p-6 mb-3">
         <div className="flex items-center gap-4">
@@ -91,18 +95,69 @@ const GeneralSettingsComponent = () => {
             </div>
 
             {/* Phone Number */}
-            <div>
+            <div className="relative">
               <label className="block text-base font-medium text-black-primary">
                 Phone Number
               </label>
               <div className="flex items-center border border-gray-border rounded-md overflow-hidden">
-                <span className="px-3 border-r border-gray-border">🇺🇸</span>
+                {/* Country Dropdown Trigger */}
+                <div
+                  className="flex items-center gap-2 px-3 border-r border-gray-border cursor-pointer select-none"
+                  onClick={() => {
+                    setPhoneCountryOpen(!phoneCountryOpen);
+                    setAddressCountryOpen(false);
+                  }}
+                >
+                  <Image
+                    src={`https://flagcdn.com/w40/${selectedCountry.code.toLowerCase()}.png`}
+                    alt={selectedCountry.name}
+                    width={20}
+                    height={15}
+                    className="object-cover"
+                  />
+                  <span className="text-sm">{selectedCountry.dial_code}</span>
+                  <Image
+                    src="/images/dashboard/arrowDown.svg"
+                    alt="Down"
+                    width={14}
+                    height={14}
+                    className={`w-3 h-3 transition-transform duration-300 ${
+                      phoneCountryOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </div>
+
+                {/* Phone input */}
                 <input
                   type="tel"
-                  placeholder="(+1) 1632 960001"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="1632 960001"
                   className="flex-1 px-3 py-2 focus:outline-none"
                 />
               </div>
+
+              {/* Dropdown Options */}
+              {phoneCountryOpen && (
+                <div className="absolute z-10 top-full left-0 w-64 max-h-64 overflow-y-auto bg-white border border-gray-border rounded-md mt-1 shadow-md">
+                  {countries.map((opt) => (
+                    <div
+                      key={opt.code}
+                      className="px-3 py-2 flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => {
+                        setSelectedCountry(opt); // sync with address
+                        setPhoneCountryOpen(false);
+                      }}
+                    >
+                      <span>{opt.flag}</span>
+                      <span>{opt.name}</span>
+                      <span className="ml-auto text-gray-500">
+                        {opt.dial_code}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Gender */}
@@ -137,24 +192,22 @@ const GeneralSettingsComponent = () => {
               </div>
 
               {/* Options */}
-              <div
-                className={`absolute z-10 top-full left-0 w-full bg-white border border-gray-border rounded-md mt-2 shadow-md overflow-hidden transition-all duration-300 ${
-                  genderOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                {genderOptions.map((opt) => (
-                  <div
-                    key={opt}
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => {
-                      setSelectedGender(opt);
-                      setGenderOpen(false);
-                    }}
-                  >
-                    {opt}
-                  </div>
-                ))}
-              </div>
+              {genderOpen && (
+                <div className="absolute z-10 top-full left-0 w-full bg-white border border-gray-border rounded-md mt-2 shadow-md overflow-hidden">
+                  {genderOptions.map((opt) => (
+                    <div
+                      key={opt}
+                      className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => {
+                        setSelectedGender(opt);
+                        setGenderOpen(false);
+                      }}
+                    >
+                      {opt}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Birth Date */}
@@ -185,6 +238,7 @@ const GeneralSettingsComponent = () => {
             <h3 className="text-xl font-medium mb-4">Personal Address</h3>
             <div className="space-y-5">
               {/* Country */}
+              {/* Country */}
               <div className="relative">
                 <label className="block mb-1 text-base font-medium text-black-primary">
                   Country
@@ -193,39 +247,58 @@ const GeneralSettingsComponent = () => {
                 {/* Trigger */}
                 <div
                   className="flex items-center justify-between bg-white border border-gray-border rounded-md p-[10px] text-sm cursor-pointer"
-                  onClick={() => setCountryOpen(!countryOpen)}
+                  onClick={() => {
+                    setAddressCountryOpen(!addressCountryOpen);
+                    setPhoneCountryOpen(false);
+                  }}
                 >
-                  <span className={`${selectedCity ? "text-black-primary" : "text-gray-primary"}`}>{selectedCountry || "Select Country"}</span>
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src={`https://flagcdn.com/w40/${selectedCountry.code.toLowerCase()}.png`}
+                      alt={selectedCountry.name}
+                      width={20}
+                      height={15}
+                      className="object-cover"
+                    />
+                    <span className="text-black-primary">
+                      {selectedCountry.name}
+                    </span>
+                  </div>
                   <Image
                     src="/images/dashboard/arrowDown.svg"
                     alt="Down"
                     width={20}
                     height={20}
                     className={`w-5 h-5 transition-transform duration-300 ${
-                      countryOpen ? "rotate-180" : "rotate-0"
+                      addressCountryOpen ? "rotate-180" : "rotate-0"
                     }`}
                   />
                 </div>
 
                 {/* Options */}
-                <div
-                  className={`absolute z-10 top-full left-0 w-full bg-white border border-gray-border rounded-md mt-2 shadow-md overflow-hidden transition-all duration-300 ${
-                    countryOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  {["United States", "Canada", "UK"].map((opt) => (
-                    <div
-                      key={opt}
-                      className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => {
-                        setSelectedCountry(opt);
-                        setCountryOpen(false);
-                      }}
-                    >
-                      {opt}
-                    </div>
-                  ))}
-                </div>
+                {addressCountryOpen && (
+                  <div className="absolute z-10 top-full left-0 w-full bg-white border border-gray-border rounded-md mt-2 shadow-md max-h-64 overflow-y-auto">
+                    {countries.map((opt) => (
+                      <div
+                        key={opt.code}
+                        className="px-4 py-2 flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => {
+                          setSelectedCountry(opt); // sync with phone dropdown
+                          setAddressCountryOpen(false);
+                        }}
+                      >
+                        <Image
+                          src={`https://flagcdn.com/w40/${opt.code.toLowerCase()}.png`}
+                          alt={opt.name}
+                          width={20}
+                          height={15}
+                          className="object-cover"
+                        />
+                        <span>{opt.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* City */}
@@ -239,7 +312,13 @@ const GeneralSettingsComponent = () => {
                   className="flex items-center justify-between bg-white border border-gray-border rounded-md p-[10px] text-sm cursor-pointer"
                   onClick={() => setCityOpen(!cityOpen)}
                 >
-                  <span className={`${selectedCity ? "text-black-primary" : "text-gray-primary"}`}>{selectedCity || "Select City"}</span>
+                  <span
+                    className={`${
+                      selectedCity ? "text-black-primary" : "text-gray-primary"
+                    }`}
+                  >
+                    {selectedCity || "Select City"}
+                  </span>
                   <Image
                     src="/images/dashboard/arrowDown.svg"
                     alt="Down"
@@ -252,24 +331,22 @@ const GeneralSettingsComponent = () => {
                 </div>
 
                 {/* Options */}
-                <div
-                  className={`absolute z-10 top-full left-0 w-full bg-white border border-gray-border rounded-md mt-2 shadow-md overflow-hidden transition-all duration-300 ${
-                    cityOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  {["Portland", "New York", "Los Angeles"].map((opt) => (
-                    <div
-                      key={opt}
-                      className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => {
-                        setSelectedCity(opt);
-                        setCityOpen(false);
-                      }}
-                    >
-                      {opt}
-                    </div>
-                  ))}
-                </div>
+                {cityOpen && (
+                  <div className="absolute z-10 top-full left-0 w-full bg-white border border-gray-border rounded-md mt-2 shadow-md">
+                    {["Portland", "New York", "Los Angeles"].map((opt) => (
+                      <div
+                        key={opt}
+                        className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => {
+                          setSelectedCity(opt);
+                          setCityOpen(false);
+                        }}
+                      >
+                        {opt}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -278,61 +355,6 @@ const GeneralSettingsComponent = () => {
           <div className="border border-gray-border rounded-[20px] p-5 lg:p-6 bg-white">
             <h3 className="text-xl font-medium mb-4">Resume</h3>
             <div className="space-y-3">
-              <div className="flex justify-between items-center border border-gray-border rounded-lg p-3">
-                <div className="flex gap-3 items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                  >
-                    <path
-                      d="M25.0001 28.0005H6.99908C6.73387 28.0005 6.47951 27.8951 6.29198 27.7076C6.10444 27.5201 5.99908 27.2657 5.99908 27.0005V5.00049C5.99908 4.73527 6.10444 4.48092 6.29198 4.29338C6.47951 4.10585 6.73387 4.00049 6.99908 4.00049H19.0001L26.0001 11.0005V27.0005C26.0001 27.1318 25.9742 27.2618 25.9239 27.3832C25.8737 27.5045 25.8 27.6147 25.7072 27.7076C25.6143 27.8005 25.5041 27.8741 25.3827 27.9244C25.2614 27.9746 25.1314 28.0005 25.0001 28.0005Z"
-                      stroke="#197CEF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M18.9999 4.00049V11.0005H26.0009"
-                      stroke="#197CEF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 16.9995H20"
-                      stroke="#197CEF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 21H20"
-                      stroke="#197CEF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-blue-secondary font-medium">
-                      Professional Resume
-                    </p>
-                    <span className="text-sm text-gray-500">3.5 MB</span>
-                  </div>
-                </div>
-                <button className="text-gray-500">
-                  <Image
-                    src="/images/dashboard/dotMenu.svg"
-                    alt="Down"
-                    width={20}
-                    height={20}
-                    className="cursor-pointer"
-                  />
-                </button>
-              </div>
               <div className="flex justify-between items-center border border-gray-border rounded-lg p-3">
                 <div className="flex gap-3 items-center">
                   <svg
